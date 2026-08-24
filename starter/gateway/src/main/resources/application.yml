@@ -6,8 +6,6 @@ spring:
     name: dsy1107-api-gateway-lab
   cloud:
     gateway:
-      default-filters:
-        - AddResponseHeader=X-Gateway-Lab, DSY1107
       server:
         webmvc:
           routes:
@@ -15,23 +13,23 @@ spring:
               uri: https://jsonplaceholder.typicode.com
               predicates:
                 - Path=/api/v1/posts/**
-                
+                - Method=GET,POST,PUT,DELETE,OPTIONS
               filters:
                 - RewritePath=/api/v1/(?<segment>.*), /$\{segment}
                 - AddResponseHeader=X-API-Version, v1
+                - AddResponseHeader=X-Gateway-Lab, DSY1107
 
-            - id: post-v1
+            - id: posts-v2
               uri: https://jsonplaceholder.typicode.com
               predicates:
                 - Path=/api/v2/posts/**
-                
+                - Method=GET,POST,PUT,DELETE,OPTIONS
               filters:
                 - RewritePath=/api/v2/(?<segment>.*), /$\{segment}
                 - AddResponseHeader=X-API-Version, v2
-              
-                
+                - AddResponseHeader=X-Gateway-Lab, DSY1107
 
 lab:
   cors:
-    enabled: false
+    enabled: true
     allowed-origin: http://localhost:5500

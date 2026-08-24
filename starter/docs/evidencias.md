@@ -99,7 +99,7 @@ R: No es lo mismo debido a que versionar el contrato publico hace que las aplica
 
 - Header esperado: `X-Gateway-Lab: DSY1107`
 - Evidencia observada:
-- ¿Por qué este comportamiento puede considerarse transversal?:
+- ¿Por qué este comportamiento puede considerarse transversal?: Se puede considerar transversal debido a que dejas como tu huella digital de quien hizo el codigo o a quien le pertenece en si inventando ese header 
 
 ---
 
@@ -108,9 +108,9 @@ R: No es lo mismo debido a que versionar el contrato publico hace que las aplica
 ### Antes de configurar CORS
 
 - URL del cliente web: `http://localhost:5500`
-- Endpoint consultado:
-- Resultado visible:
-- Mensaje relevante en Console/Network:
+- Endpoint consultado: api/v1/posts/1
+- Resultado visible: El codigo HTTP 200 y el body en formato json devolviendo el objeto 1 de la lista 
+- Mensaje relevante en Console/Network: Los Request aparecen como header como el de URL que sale a que url le estamos consultando  o el metodo que estamos haciendo 
 
 ### Después de configurar CORS
 
