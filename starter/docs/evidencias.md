@@ -173,7 +173,7 @@ Explicar qué elementos observados en el laboratorio permiten afirmar que la API
 
 | Integrante | Rama | Pull Request | Aporte principal |
 |---|---|---|---|
-| Rodrigo Cruz | Feature/cors y Feature/version-v2 |  | Completar todo el laboratorio |
+| Rodrigo Cruz | Feature/cors y Feature/version-v2 | https://github.com/VoodoooQ/dsy1107-lab-api-gateway-grupo-06/pull/1 | Completar todo el laboratorio |
 
 
 
