@@ -99,7 +99,8 @@ R: No es lo mismo debido a que versionar el contrato publico hace que las aplica
 
 - Header esperado: `X-Gateway-Lab: DSY1107`
 - Evidencia observada:
-- ¿Por qué este comportamiento puede considerarse transversal?: Se puede considerar transversal debido a que dejas como tu huella digital de quien hizo el codigo o a quien le pertenece en si inventando ese header 
+- ¿Por qué este comportamiento puede considerarse transversal?: 
+R:Se puede considerar transversal debido a que dejas como tu huella digital de quien hizo el codigo o a quien le pertenece. 
 
 ---
 
@@ -114,7 +115,7 @@ R: No es lo mismo debido a que versionar el contrato publico hace que las aplica
 
 ### Después de configurar CORS
 
-- Resultado visible:
+- Resultado visible: En la pagina web se puede observar que nos da que hay problema con CORS 
 - `Access-Control-Allow-Origin`:
 - `Access-Control-Allow-Methods`:
 
