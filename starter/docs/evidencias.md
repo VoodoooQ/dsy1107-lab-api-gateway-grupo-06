@@ -1,9 +1,10 @@
 # Evidencias · Laboratorio API Gateway
 
 ## Integrantes
-- Nombre:
-- Nombre:
-- Nombre:
+- Nombre:Rodrigo Cruz
+- Nombre:Maximiliano Diaz
+- Nombre:Mario Jaramillo
+- Nombre:Felipe Farias
 
 ## 1. Backend directo
 
@@ -115,22 +116,27 @@ R:Se puede considerar transversal debido a que dejas como tu huella digital de q
 
 ### Después de configurar CORS
 
-- Resultado visible: En la pagina web se puede observar que nos da que hay problema con CORS 
-- `Access-Control-Allow-Origin`:
-- `Access-Control-Allow-Methods`:
+- Resultado visible: En la pagina web se puede observar que nos da que hay problema con CORS y eso esta bien ya que nos devuelve 304 osea responde pero no recibimos nada mientras que en Postman nos devuelve bien 200 y con el objeto que buscamos 
+- `Access-Control-Allow-Origin`:http://localhost:5500
+- `Access-Control-Allow-Methods`:GET,POST,PUT,DELETE,OPTIONS
 
 ### Preflight OPTIONS
 
-- Request utilizado:
-- Status:
-- Headers relevantes:
+- Request utilizado: curl -i -X OPTIONS http://localhost:8080/api/v1/posts -H "Origin: http://localhost:5500" -H "Access-Control-Request-Method: POST"
+- Status:200 OK
+- Headers relevantes: Access-Control-Allow-Origin: http://localhost:5500
+Access-Control-Allow-Methods: GET,POST,PUT,DELETE,OPTIONS
 
 Responder:
 
 1. ¿Por qué Postman puede funcionar cuando el navegador falla?
+R:Porque Postman es una aplicacion y no una pagina web ya que el CORS se enfoca en eso , en paginas web y Postman inyecta altiro la peticion que hacemos saltandose como esa seguridad que nos da CORS
 2. ¿Qué es un preflight?
+R:Preflight hace que cuando una pagina web hace una peticion hacia el servidor esta actua antes para verificar si esta pagina web puede hacer esa peticion y si puede se hace la peticion 
 3. ¿CORS autentica o autoriza usuarios?
+R: CORS autoriza origenes y no usuarios 
 4. ¿Qué riesgo tendría permitir cualquier origen sin analizar el contexto?
+R:Tendria que esa pagina seria vulnerable a cualquier tipo de ataque proveniente de paginas web o que la informacion que esta tenga este expuesta por eso hay que analizar el contexto y autorizar las paginas web con las que solamente interactuara la nuestra.
 
 ---
 
@@ -144,22 +150,22 @@ Explicar qué elementos observados en el laboratorio permiten afirmar que la API
 
 | Responsabilidad | Cliente | Gateway | Backend | Justificación |
 |---|:---:|:---:|:---:|---|
-| routing | | | | |
-| lógica de negocio | | | | |
-| autenticación/autorización | | | | |
-| transformación de rutas | | | | |
-| persistencia | | | | |
-| rate limiting | | | | |
-| reglas de negocio | | | | |
-| observabilidad | | | | |
+| routing |  | x |  | Debido a que recibe la peticion y este decide a donde debe enviarla segun la url |
+| lógica de negocio |  |  | x | Aqui es donde se procesa la informacion y se ejecuta el proposito del software |
+| autenticación/autorización |  | x | x | Son las dos porque el Gateway actua como una primera capa de seguridad en la que este valida si el token es real y si lo es lo pasa al backend para que actue como una segunda capa de seguridad y verificar si es real y que permisos tiene |
+| transformación de rutas |  | x |  | Es Gateway ya que ocupa RewritePath para ocultar la estructura interna antes de enviarla al backend |
+| persistencia |  |  | x | Es backend debido a que este se conecta a la base de datos para guardar,actualizar o borrar informacion |
+| rate limiting |  | x |  | Es Gateway porque este antes de que entre una peticion pone un limite para no sobresaturar al backend  |
+| reglas de negocio |  |  | x | Similar a la logica de negocio este tambien se encarga el backend porque se encarga de las restricciones internas del sistema |
+| observabilidad |  | x | x | Son las 2 debido a que uno se encarga de monitorear el trafico de peticiones y otra sea encarga de los detalles internos como que cuanto se demoro la base de datos en responder  |
 
 ---
 
 ## 10. Problemas encontrados
 
-1. Problema:
-   - causa:
-   - solución:
+1. Problema:CORS mal configurado 
+   - causa:Al habilitar el CORS y configurarlo para que solamente acepte las peticiones que se nos pidio nos daba un error 404 cosa que no deberia y era debido a la estructura del application con los niveles y esto hacia que cuando se hiciera una peticion al backend este no supiera que hacer ya que es como si no tuviera nada configurado de rutas y eso da 404 como en el cliente como tambien en Postman
+   - solución:La solucion fue probar otro metodo para implementar el cors no como salia en la guia sino hacerlo en la misma ruta (id) ponerlo en "predicates" y ahi si pasaba el cors y no nos daba error en cliente y Postman si pasaba.
 
 ---
 
@@ -167,7 +173,10 @@ Explicar qué elementos observados en el laboratorio permiten afirmar que la API
 
 | Integrante | Rama | Pull Request | Aporte principal |
 |---|---|---|---|
-| | | | |
+| Rodrigo Cruz | Feature/cors y Feature/version-v2 |  | Completar todo el laboratorio |
+
+
+
 
 Agregar enlaces a los Pull Requests.
 
@@ -176,5 +185,8 @@ Agregar enlaces a los Pull Requests.
 ## 12. Conclusiones
 
 - ¿Qué problema resolvió el gateway?
+R:El gateway refuerza la seguridad ante las paginas web y poder permitir solamente las paginas confiables o que se ocupen en el contexto para que no se vulnere la informacion sensible que uno tiene proveniente del ataque de una pagina externa.
 - ¿Qué concepto del laboratorio sería equivalente al trabajar posteriormente con Amazon API Gateway?
+R:Todo lo que hicimos como la configuracion de enrutamiento y politicas transversales se puede aplicar en cualquier tecnologia.
 - ¿Qué aprendió el grupo que no depende específicamente de Spring Cloud Gateway?
+R:Aprendimos que la seguridad en base a CORS y como los navegadores realizan peticiones previas con Preflight es una regla que no solo existe en Spring Cloud Gateway si no que es aplicada en cualquier navegador o lenguaje.
